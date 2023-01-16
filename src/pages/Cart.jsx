@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from '../components/Button';
 import CartProduct from '../components/CartProduct';
 
 export default class Cart extends Component {
@@ -20,10 +21,16 @@ export default class Cart extends Component {
     const { productsList } = this.state;
     return (
       <div className="cart-div">
-        <h2 data-testid="shopping-cart-empty-message">
-          { !productsList
-            ? 'Seu carrinho está vazio'
-            : productsList.map((item) => (
+        {
+          (productsList.length === 0) && (
+            <div data-testid="shopping-cart-empty-message">
+              <p>Seu carrinho está vazio</p>
+            </div>
+          )
+        }
+        <div>
+          {
+            productsList.map((item) => (
               <CartProduct
                 name={ item.productObj.title }
                 image={ item.productObj.thumbnail }
@@ -31,8 +38,12 @@ export default class Cart extends Component {
                 price={ item.productObj.price }
                 key={ item.productObj.id }
               />
-            ))}
-        </h2>
+            ))
+          }
+        </div>
+        <div className="checkout-button-div">
+          <Button text="Finalizar Compra" />
+        </div>
       </div>
     );
   }

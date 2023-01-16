@@ -63,9 +63,13 @@ class Home extends React.Component {
           </button>
           <Link
             to="/Cart"
-            data-testid="shopping-cart-button"
           >
-            Carrinho de compras
+            <button
+              type="button"
+              data-testid="shopping-cart-button"
+            >
+              Carrinho de compras
+            </button>
           </Link>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
