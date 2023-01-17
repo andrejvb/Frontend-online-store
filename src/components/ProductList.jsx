@@ -14,7 +14,7 @@ class ProductList extends React.Component {
   render() {
     const { products } = this.props;
     return (
-      <>
+      <div className="products-div">
         {products.map((element) => (
           <>
             <Link
@@ -25,16 +25,17 @@ class ProductList extends React.Component {
               <div
                 key={ element.id }
                 data-testid="product"
+                className="product-card"
               >
                 <h2>{ element.title }</h2>
                 <img src={ element.thumbnail } alt={ element.title } />
-                <p>{ element.price }</p>
+                <h2>{` R$${element.price} `}</h2>
               </div>
             </Link>
             <AddToCart productObj={ element } />
           </>
         ))}
-      </>
+      </div>
     );
   }
 }

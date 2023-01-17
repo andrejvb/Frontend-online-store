@@ -21,15 +21,10 @@ export default class Cart extends Component {
     const { productsList } = this.state;
     return (
       <div className="cart-div">
-        {
-          (productsList.length === 0) && (
-            <div data-testid="shopping-cart-empty-message">
-              <p>Seu carrinho está vazio</p>
-            </div>
-          )
-        }
         <div>
-          {
+          { (!productsList || productsList.length === 0) ? (
+            <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+          ) : (
             productsList.map((item) => (
               <CartProduct
                 name={ item.productObj.title }
@@ -38,8 +33,7 @@ export default class Cart extends Component {
                 price={ item.productObj.price }
                 key={ item.productObj.id }
               />
-            ))
-          }
+            )))}
         </div>
         <div className="checkout-button-div">
           <Button text="Finalizar Compra" />

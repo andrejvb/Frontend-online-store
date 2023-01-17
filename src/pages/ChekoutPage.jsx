@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CartProduct from '../components/CartProduct';
+import './CheckoutPage.css';
 
 class ChekoutPage extends Component {
   state = {
@@ -66,8 +67,8 @@ class ChekoutPage extends Component {
   render() {
     const { checkoutList, isInvalid, clicked } = this.state;
     return (
-      <>
-        <section>
+      <div className="checkout-page-app-div">
+        <div className="shopping-cart-button-div">
           <Link
             to="/Cart"
           >
@@ -75,10 +76,15 @@ class ChekoutPage extends Component {
               type="button"
               data-testid="shopping-cart-button"
             >
-              Carrinho de compras
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
+                alt="cart button"
+              />
             </button>
           </Link>
-          <h2>
+        </div>
+        <section>
+          <div className="cart-products-div">
             {
               checkoutList.map((item) => (
                 <CartProduct
@@ -90,10 +96,17 @@ class ChekoutPage extends Component {
                 />
               ))
             }
-          </h2>
+          </div>
         </section>
         <form method="GET">
-          <label htmlFor="fullname">
+          <h1>Finalizar Pedido</h1>
+          <h3>Informações Pessoais</h3>
+          {
+            (isInvalid && clicked) && (
+              <h3 data-testid="error-msg" className="error-msg">Campos inválidos</h3>
+            )
+          }
+          <label htmlFor="fullname" className="label">
             Nome Completo:
             <input
               type="text"
@@ -103,7 +116,7 @@ class ChekoutPage extends Component {
               onChange={ this.handleChange }
             />
           </label>
-          <label htmlFor="email">
+          <label htmlFor="email" className="label">
             Email:
             <input
               type="email"
@@ -113,7 +126,7 @@ class ChekoutPage extends Component {
               onChange={ this.handleChange }
             />
           </label>
-          <label htmlFor="cpf">
+          <label htmlFor="cpf" className="label">
             CPF:
             <input
               type="text"
@@ -123,7 +136,7 @@ class ChekoutPage extends Component {
               onChange={ this.handleChange }
             />
           </label>
-          <label htmlFor="phone">
+          <label htmlFor="phone" className="label">
             Telefone:
             <input
               type="text"
@@ -133,7 +146,7 @@ class ChekoutPage extends Component {
               onChange={ this.handleChange }
             />
           </label>
-          <label htmlFor="cep">
+          <label htmlFor="cep" className="label">
             CEP:
             <input
               type="text"
@@ -143,7 +156,7 @@ class ChekoutPage extends Component {
               onChange={ this.handleChange }
             />
           </label>
-          <label htmlFor="address">
+          <label htmlFor="address" className="label">
             Endereço:
             <input
               type="text"
@@ -153,10 +166,14 @@ class ChekoutPage extends Component {
               onChange={ this.handleChange }
             />
           </label>
+          <h2>Método de Pagamento:</h2>
           <section className="payment-selector-section">
-            <p>Método de Pagamento:</p>
             <label htmlFor="ticket">
               Boleto
+              <img
+                src="https://imagepng.org/wp-content/uploads/2019/09/boleto-simbolo.png"
+                alt="boleto"
+              />
               <input
                 type="radio"
                 name="payment"
@@ -168,6 +185,10 @@ class ChekoutPage extends Component {
             </label>
             <label htmlFor="visa">
               Visa
+              <img
+                src="https://conteudos.xpi.com.br/wp-content/uploads/2022/01/image-963.png?w=640"
+                alt="boleto"
+              />
               <input
                 type="radio"
                 name="payment"
@@ -179,6 +200,10 @@ class ChekoutPage extends Component {
             </label>
             <label htmlFor="master">
               Master
+              <img
+                src="https://freepngimg.com/thumb/credit_card/25637-6-credit-card-visa-and-master-card-transparent-image.png"
+                alt="boleto"
+              />
               <input
                 type="radio"
                 name="payment"
@@ -190,6 +215,10 @@ class ChekoutPage extends Component {
             </label>
             <label htmlFor="elo">
               Elo
+              <img
+                src="https://3.bp.blogspot.com/-mMRfKGgcQ38/WAlbT7YTNTI/AAAAAAAASzo/JqBsj22m4O4fxhyOvyVcyxggyblRUItcgCLcB/s1600/Cart%25C3%25A3o%2BElo%2Bpatrocina%2B42%25C2%25AA%2Bedi%25C3%25A7%25C3%25A3o%2Bdo%2BS%25C3%25A3o%2BPaulo%2BFashion%2BWeek.png"
+                alt="boleto"
+              />
               <input
                 type="radio"
                 name="payment"
@@ -200,13 +229,9 @@ class ChekoutPage extends Component {
               />
             </label>
           </section>
-          {
-            (isInvalid && clicked) && (
-              <h3 data-testid="error-msg">Campos inválidos</h3>
-            )
-          }
           <Link
             to={ !isInvalid && '/' }
+            className="buy-button"
           >
             <button
               type="button"
@@ -217,7 +242,7 @@ class ChekoutPage extends Component {
             </button>
           </Link>
         </form>
-      </>
+      </div>
     );
   }
 }

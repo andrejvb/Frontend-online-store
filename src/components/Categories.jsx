@@ -26,11 +26,12 @@ export default class Categories extends Component {
   render() {
     const { categories } = this.state;
     return (
-      <div>
+      <div className="categories-div">
         <p>Categorias</p>
         {categories.map((category) => (
           <div
             key={ category.id }
+            className="categorie"
           >
             <label
               htmlFor={ category.id }
